@@ -34,12 +34,10 @@ object FoxData : DataWrapper<Fox>(Fox::class) {
         }
     }
 
-    fun Fox.Type.translate():String  {
+    fun Fox.Type.translate(): String {
         return when (this) {
             Fox.Type.RED -> "红狐"
             Fox.Type.SNOW -> "北极狐"
         }
     }
-
-
 }
