@@ -2,19 +2,26 @@ package com.entiv.pokeballcatch.data
 
 import de.tr7zw.nbtapi.NBTCompound
 import net.kyori.adventure.text.Component
+import org.bukkit.Bukkit
 import org.bukkit.entity.AnimalTamer
 import org.bukkit.entity.Fox
 
 object FoxData : DataWrapper<Fox>(Fox::class) {
     override fun entityWriteToNbt(entity: Fox, compound: NBTCompound) {
-        compound.setObject("firstTrustedPlayer", entity.firstTrustedPlayer)
-        compound.setObject("secondTrustedPlayer", entity.secondTrustedPlayer)
+        entity.firstTrustedPlayer?.name.let {
+            compound.setString("firstTrustedPlayer", it)
+        }
+        entity.firstTrustedPlayer?.name.let {
+            compound.setString("secondTrustedPlayer", it)
+        }
+
         compound.setString("foxType", entity.foxType.name)
     }
 
     override fun nbtWriteToEntity(compound: NBTCompound, entity: Fox) {
-        entity.firstTrustedPlayer = compound.getObject("firstTrustedPlayer", AnimalTamer::class.java)
-        entity.secondTrustedPlayer = compound.getObject("secondTrustedPlayer", AnimalTamer::class.java)
+        entity.firstTrustedPlayer = Bukkit.getPlayer(compound.getString("firstTrustedPlayer"))
+        entity.secondTrustedPlayer = Bukkit.getPlayer(compound.getString("secondTrustedPlayer"))
+
         entity.foxType = Fox.Type.valueOf(compound.getString("foxType"))
     }
 

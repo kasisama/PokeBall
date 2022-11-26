@@ -2,8 +2,6 @@ package com.entiv.pokeballcatch.command
 
 import com.entiv.core.command.CompositeCommand
 import com.entiv.core.command.DefaultCommand
-import com.entiv.core.utils.InventoryUtil
-import com.entiv.core.utils.addOrDrop
 import com.entiv.core.utils.errorPrefix
 import com.entiv.pokeballcatch.pokeball.PokeBallManager
 import com.entiv.pokeballcatch.utils.config
@@ -26,7 +24,7 @@ object GiveCommand : CompositeCommand(
         val amount = findIntOrNull(2) ?: 1
 
         itemStack.amount = amount
-        player.inventory.addOrDrop(player, itemStack)
+        player.inventory.addItem(itemStack)
     }
 
     override fun onTabComplete(sender: CommandSender, args: Array<String>): List<String> {
