@@ -9,10 +9,7 @@ import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockPlaceEvent
-import org.bukkit.event.inventory.ClickType
-import org.bukkit.event.inventory.InventoryClickEvent
-import org.bukkit.event.inventory.InventoryDragEvent
-import org.bukkit.event.inventory.InventoryType
+import org.bukkit.event.inventory.*
 import org.bukkit.event.player.PlayerInteractEntityEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.EquipmentSlot
@@ -123,6 +120,13 @@ object PokeBallManager : PluginModule(), Listener {
                 event.isCancelled = true
                 return
             }
+        }
+    }
+
+    @EventHandler
+    private fun denyHopperPickup(event: InventoryPickupItemEvent) {
+        if (event.item.itemStack.isPokeBall()) {
+            event.isCancelled = true
         }
     }
 }

@@ -29,5 +29,10 @@ object InventoryData : DataWrapper<InventoryHolder>(InventoryHolder::class) {
 
     override fun entityWriteToComponent(entity: InventoryHolder, components: MutableList<Component>) {
         noNeedComponent()
+        entity.inventory.contents
+            .mapNotNull { it?.type }
+            .map { Component.translatable(it.translationKey()) }
+            .joinToString { "$it" }
+
     }
 }

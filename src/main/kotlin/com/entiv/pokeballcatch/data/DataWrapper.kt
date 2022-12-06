@@ -96,7 +96,5 @@ sealed class DataWrapper<T : Any>(private val clazz: KClass<T>) {
         }
     }
 
-
-
     protected fun noNeedComponent() {}
 }
