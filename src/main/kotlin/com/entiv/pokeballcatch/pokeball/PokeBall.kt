@@ -106,7 +106,7 @@ class PokeBall(
                 val itemStack = item.itemStack
 
                 item.remove()
-                spawnEntity(itemStack, location)
+                spawnEntity(itemStack, location.add(0.0, 0.5, 0.0))
 
                 if (!config.getBoolean("基础设置.一次性精灵球")) {
                     val newItem = item.world.dropItem(location, getPokeBallItem())
@@ -299,7 +299,6 @@ class PokeBall(
             debug(states.joinToString { it.clazz.simpleName!! })
 
             val biMap = HashBiMap.create<EntityType, KClass<out Entity>>()
-
             val entityTypes = EntityType.values()
 
             entityTypes.mapNotNull { it.entityClass }
